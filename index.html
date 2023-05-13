@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>API</title>
+</head>
+<body>
+  <button>Fetch Data</button>
+  
+  <script>
+    const API1 = 'https://dummyjson.com/posts';
+    const API2 = 'https://dummyjson.com/products';
+    const API3 = 'https://dummyjson.com/todos';
+
+    const button = document.querySelector('button');
+    function promiseAPI1() {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          fetch(API1)
+            .then(response => response.json())
+            .then(data => {
+              console.log('API 1 data:', data);
+              resolve(true);
+            });
+        }, 1000);
+      });
+    }
+
+    function promiseAPI2() {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          fetch(API2)
+            .then(response => response.json())
+            .then(data => {
+              console.log('API 2 data:', data);
+              resolve(true);
+            });
+        }, 2000);
+      });
+    }
+
+    function promiseAPI3() {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          fetch(API3)
+            .then(response => response.json())
+            .then(data => {
+              console.log('API 3 data:', data);
+              resolve(true);
+            });
+        }, 3000);
+      });
+    }
+
+    button.addEventListener('click', () => {
+      promiseAPI1()
+        .then(() => {
+          if (true) {
+            return promiseAPI2();
+          }
+        })
+        .then(() => {
+          if (true) {
+            return promiseAPI3();
+          }
+        });
+    });
+  </script>
+</body>
+</html>
